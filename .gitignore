@@ -1,0 +1,30 @@
+# ROS 2
+build/
+install/
+log/
+*.pyc
+*.swp
+*.swo
+*.tmp
+*.bak
+*.log
+*.orig
+
+# OS generated
+.DS_Store
+Thumbs.db
+
+# IDEs
+.vscode/
+.idea/
+*.iml
+
+# CMake
+CMakeFiles/
+CMakeCache.txt
+Makefile
+cmake_install.cmake
+
+# Misc
+*.zip
+*.tar.gz

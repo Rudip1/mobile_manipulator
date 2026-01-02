@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://ros.org/wiki/xacro" name="scout_wheel_type1_gazebo">
+
+  <!--
+    Macro for type1 wheel suitable for Gazebo
+    Parameters:
+      wheel_prefix : unique prefix for each wheel (e.g., front_left)
+      joint_pose   : optional origin/rpy block
+  -->
+  <xacro:macro name="scout_wheel_type1" params="wheel_prefix *joint_pose">
+
+    <!-- Wheel link -->
+    <link name="${wheel_prefix}_wheel_link">
+      <inertial>
+        <mass value="3"/>
+        <origin xyz="0 0 0"/>
+        <inertia ixx="0.7171" ixy="0" ixz="0" iyy="0.1361" iyz="0" izz="0.7171"/>
+      </inertial>
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <mesh filename="file://$(find scout_description)/meshes/wheel_type1.dae"/>
+        </geometry>
+      </visual>
+      <collision>
+        <origin xyz="0 0 0" rpy="${M_PI/2} 0 0"/>
+        <geometry>
+          <cylinder length="${wheel_length}" radius="${wheel_radius}"/>
+        </geometry>
+      </collision>
+    </link>
+
+    <!-- Unique joint for this wheel -->
+    <joint name="${wheel_prefix}_wheel_joint" type="continuous">
+      <parent link="base_link"/>
+      <child link="${wheel_prefix}_wheel_link"/>
+      <xacro:insert_block name="joint_pose"/>
+      <axis xyz="0 -1 0"/>
+    </joint>
+
+    <!-- Optional Gazebo friction properties -->
+    <gazebo reference="${wheel_prefix}_wheel_link">
+      <mu1>1.0</mu1>
+      <mu2>1.0</mu2>
+      <rolling_friction>0.001</rolling_friction>
+    </gazebo>
+
+  </xacro:macro>
+
+</robot>

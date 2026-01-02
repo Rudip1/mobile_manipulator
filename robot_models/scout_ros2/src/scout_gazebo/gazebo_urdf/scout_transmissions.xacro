@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="scout_transmissions">
+
+  <!--
+    Macro for a single wheel transmission
+    Params:
+      wheel_prefix: unique name for wheel (front_left, front_right, etc.)
+  -->
+  <xacro:macro name="scout_wheel_transmission" params="wheel_prefix">
+    <transmission name="${wheel_prefix}_wheel_trans" type="SimpleTransmission">
+      <type>transmission_interface/SimpleTransmission</type>
+      <actuator name="${wheel_prefix}_motor">
+        <mechanicalReduction>1</mechanicalReduction>
+      </actuator>
+      <joint name="${wheel_prefix}_wheel_joint">
+        <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+      </joint>
+    </transmission>
+  </xacro:macro>
+
+  <!-- Instantiate transmissions for all wheels -->
+  <xacro:scout_wheel_transmission wheel_prefix="front_left"/>
+  <xacro:scout_wheel_transmission wheel_prefix="front_right"/>
+  <xacro:scout_wheel_transmission wheel_prefix="rear_left"/>
+  <xacro:scout_wheel_transmission wheel_prefix="rear_right"/>
+
+</robot>
