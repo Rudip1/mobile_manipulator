@@ -148,7 +148,7 @@
     <right_joint>rear_right_wheel_joint</right_joint>
 
     <wheel_separation>${track}</wheel_separation>
-    <wheel_radius>${wheel_radius}</wheel_radius>
+    <wheel_diameter>${2*wheel_radius}</wheel_diameter>
 
     <publish_odom>true</publish_odom>
     <odometry_frame>odom</odometry_frame>
